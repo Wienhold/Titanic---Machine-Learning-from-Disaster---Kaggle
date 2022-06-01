@@ -11,7 +11,7 @@ As I always love a challenge, I chose to work on the Titanic Kaggle competition 
 
 ### Overview
 The dataset used in this project was downloaded from [Kaggle](https://www.kaggle.com/competitions/titanic/overview), where I also registered for the competition and later can submit my predictions. We are provided a [train](https://www.kaggle.com/competitions/titanic/data?select=train.csv) and a [test](https://www.kaggle.com/competitions/titanic/data?select=test.csv) dataset with 891 and 418 records, respectively.
-We are given the following 11 parameters, here some examplary data:
+We are given the following 12 columns, here some examplary data:
 ![image](https://user-images.githubusercontent.com/98894580/171413959-3d7347e6-3a4e-42f6-a359-697bc56b30ff.png)
 
 As we can already see from the first few records, there are some missing values. Our first task will be to handle those.
