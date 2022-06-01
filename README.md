@@ -11,11 +11,12 @@ As I always love a challenge, I chose to work on the Titanic Kaggle competition 
 
 ### Overview
 The dataset used in this project was downloaded from [Kaggle](https://www.kaggle.com/competitions/titanic/overview), where I also registered for the competition and later can submit my predictions. We are provided a [train](https://www.kaggle.com/competitions/titanic/data?select=train.csv) and a [test](https://www.kaggle.com/competitions/titanic/data?select=test.csv) dataset with 891 and 418 records, respectively.
-We are given the following 11 parameters:
+We are given the following 11 parameters, here some examplary data:
 ![image](https://user-images.githubusercontent.com/98894580/171413959-3d7347e6-3a4e-42f6-a359-697bc56b30ff.png)
 
+As we can already see from the first few records, there are some missing values. Our first task will be to handle those.
 
-### Feature Engineering
+### Feature Completion
 Descriptive statistics for the combined train+test dataset were received from Minitab statistical software. 
 ![image](https://user-images.githubusercontent.com/98894580/171394293-547806cf-0809-4a83-b508-0528e1dd18bb.png)
 
@@ -32,7 +33,26 @@ It is obvious when we look at the residual plots that there is still a lot of de
 
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+From the given features for each record we want to make a prediction if this person did survive the Titanic disaster or not. Therefore relevant features should be identified to help us with this task.
+Used features:
+- Pclass: integer, ticket class (1, 2, 3), proxy for wealth
+- Sex: string, male or female
+- Age: float, age in years
+- Sibsp: integer, number of siblings and/or spouses aboard (brother, sister, stepbrother, stepsister, husband, wife)
+- Parch: integer, number of parents and/or children aboard (mother, father, daughter, son, stepdaughter, stepson)
+- Fare: float, amoung of money paid for the ticket
+- Embarked: string, port of embarkation	(C = Cherbourg, Q = Queenstown, S = Southampton)
+
+Discarded features:
+- PassengerId: integer, internal key
+- Name: string
+- Ticket: string, ticket numbers as various formats
+- Cabin: string, cabin number, many missing values
+
+Target:
+- Survived: binary, ground truth
+
+So we will use 7 features for training and prediction.
 
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
