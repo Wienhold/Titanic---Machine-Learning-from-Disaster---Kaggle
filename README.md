@@ -1,8 +1,8 @@
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
+# Machine Learning Engineer for MS Azure - Capstone Project
+# Titanic - Machine Learning from Disaster (Kaggle Competition)
 
-# Your Project Title Here
-
-*TODO:* Write a short introduction to your project.
+After gaining some experience in working with Azure ML during my Udacity nanodegree I now want to finish the course with my capstone project.
+As I always love a challenge, I chose to work on the Titanic Kaggle competition project.
 
 ## Project Set Up and Installation
 *OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
@@ -10,7 +10,10 @@
 ## Dataset
 
 ### Overview
-*TODO*: Explain about the data you are using and where you got it from.
+The dataset used in this project was downloaded from [Kaggle](https://www.kaggle.com/competitions/titanic/overview), where I also registered for the competition and later can submit my predictions. We are provided a [train](https://www.kaggle.com/competitions/titanic/data?select=train.csv) and a [test](https://www.kaggle.com/competitions/titanic/data?select=test.csv) dataset with 891 and 418 records, respectively.
+We are given the following 11 parameters:
+![image](https://user-images.githubusercontent.com/98894580/171413959-3d7347e6-3a4e-42f6-a359-697bc56b30ff.png)
+
 
 ### Feature Engineering
 Descriptive statistics for the combined train+test dataset were received from Minitab statistical software. 
