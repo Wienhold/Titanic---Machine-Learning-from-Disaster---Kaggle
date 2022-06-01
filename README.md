@@ -17,7 +17,7 @@ Descriptive statistics for the combined train+test dataset were received from Mi
 ![image](https://user-images.githubusercontent.com/98894580/171394293-547806cf-0809-4a83-b508-0528e1dd18bb.png)
 
 Here we can see that we have two incomplete feature columns: 418 missing values for age and 1 missing value for fare.
-The later should be less relevant for our predictions so it will be chosen randomly from the rest of the dataset.
+The later should be less relevant for our predictions so we will just fill it with the mean from the rest of the dataset.
 But the missing age values pose a relevant portion of all records in the dataset, so a more elaborate solution should be developed.
 Using  Minitab's Predictive Analytics Module, a CART regression analysis was performed with Pclass, SibSp and Parch (ticket class, N of parents & spouses, N of parents & children) as categorical variables, aiming for least squared error and using a 10-fold cross validation.
 As we see in the tree diagram, six terminal nodes were found.
