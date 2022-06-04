@@ -8,7 +8,7 @@ def init():
     global model
     model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'model.pkl')
     model = joblib.load(model_path)
-    print("Model loaded:\n",model)
+    print("Model loaded:\n", model)
 
 def run(data):
     try:
