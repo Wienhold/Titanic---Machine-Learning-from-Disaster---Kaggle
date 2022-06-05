@@ -41,10 +41,7 @@ def main():
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42)
     print("Performed train-test split")
 
-    model = GradientBoostingRegressor(max_depth=args.max_depth, learning_rate=args.learning_rate),
-
-    # Train the model on the data    
-    model = model.fit(x_train, y_train)
+    model = GradientBoostingRegressor(max_depth=args.max_depth, learning_rate=args.learning_rate).fit(x_train, y_train)
     print("Model was trained by train data")
     
     accuracy = model.score(x_test, y_test)
