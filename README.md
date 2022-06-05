@@ -56,7 +56,8 @@ The training dataset as well as the testing dataset are registered within MS Azu
 
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
-`automl_settings = {"max_concurrent_iterations": 5,
+```
+automl_settings = {"max_concurrent_iterations": 5,
 "max_cores_per_iteration": -1,
 "enable_dnn": True,
 "enable_early_stopping": True,
@@ -72,7 +73,8 @@ label_column_name="Survived",
 path = project_folder,
 featurization= 'auto',
 debug_log = "automl_errors.log",
-**automl_settings )`
+**automl_settings )
+```
 
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
