@@ -4,9 +4,6 @@
 After gaining some experience in working with Azure ML during my Udacity nanodegree I now want to finish the course with my capstone project.
 As I always love a challenge, I chose to work on the Titanic Kaggle competition project.
 
-## Project Set Up and Installation
-*OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
-
 ## Dataset
 
 ### Overview
@@ -55,10 +52,27 @@ Target:
 So we will use 7 features for training and prediction.
 
 ### Access
-*TODO*: Explain how you are accessing the data in your workspace.
+The training dataset as well as the testing dataset are registered within MS Azure. Furthermore, respective filtered versions with only the relevant features specified above as well as with the target "Survived" for the training dataset were registered as well.
 
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+`automl_settings = {"max_concurrent_iterations": 5,
+"max_cores_per_iteration": -1,
+"enable_dnn": True,
+"enable_early_stopping": True,
+"validation_size": 0.2,
+"primary_metric" : 'accuracy',
+"enable_voting_ensemble": False,
+"enable_stack_ensemble": False }
+
+automl_config = AutoMLConfig(compute_target=compute_target,
+task = "classification",
+training_data=dataset_filtered,
+label_column_name="Survived",
+path = project_folder,
+featurization= 'auto',
+debug_log = "automl_errors.log",
+**automl_settings )`
 
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
