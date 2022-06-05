@@ -123,10 +123,4 @@ Probably ```GradientBoostingRegressor``` was not the best choice for solving thi
 As this result was not very promising, deploying an endpoint for submission of the testing data was skipped for this model.
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
-
-## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+[Presentation on YouTube](https://youtu.be/brFCfghLiHc)
