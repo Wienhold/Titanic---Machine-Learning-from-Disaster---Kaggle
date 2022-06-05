@@ -52,46 +52,75 @@ Target:
 So we will use 7 features for training and prediction.
 
 ### Access
-The training dataset as well as the testing dataset are registered within MS Azure. Furthermore, respective filtered versions with only the relevant features specified above as well as with the target "Survived" for the training dataset were registered as well.
+The training dataset as well as the testing dataset are registered within MS Azure. Furthermore, respective filtered versions with only the relevant features specified above as well as with the target "Survived" for the training dataset were registered as well. As the Hyperdrive run itself does not include automatic feature encoding like AutoML, one-hot encoding using pandas' ```get_dummies()``` method was applied in addition.
+![image](https://user-images.githubusercontent.com/98894580/172067898-068f671e-47d6-44a5-9fe7-2107d48fb222.png)
+
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+For the AutoML experiment we choose the following settings. They include the options for deep learning and for early stopping to save computation time for less promising approaches, as well as the 80%-20% train-validation split and the definition of accuracy as the primary metric. We also want to find a single promising model, so we disable ensembles.
 ```
-automl_settings = {"max_concurrent_iterations": 5,
-"max_cores_per_iteration": -1,
-"enable_dnn": True,
-"enable_early_stopping": True,
-"validation_size": 0.2,
-"primary_metric" : 'accuracy',
-"enable_voting_ensemble": False,
-"enable_stack_ensemble": False }
+automl_settings = {
+  "max_concurrent_iterations": 5,
+  "max_cores_per_iteration": -1,
+  "enable_dnn": True,
+  "enable_early_stopping": True,
+  "validation_size": 0.2,
+  "primary_metric" : 'accuracy',
+  "enable_voting_ensemble": False,
+  "enable_stack_ensemble": False
+  }
 
-automl_config = AutoMLConfig(compute_target=compute_target,
-task = "classification",
-training_data=dataset_filtered,
-label_column_name="Survived",
-path = project_folder,
-featurization= 'auto',
-debug_log = "automl_errors.log",
-**automl_settings )
+automl_config = AutoMLConfig(
+  compute_target=compute_target,
+  task = "classification",
+  training_data=dataset_filtered,
+  label_column_name="Survived",
+  path = project_folder,
+  featurization= 'auto',
+  debug_log = "automl_errors.log",
+  **automl_settings
+  )
 ```
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
+After submission the experiment took about 22 min to complete. A total of 54 models were tested, with the best model reaching an accuracy of 82.7%. 
+![image](https://user-images.githubusercontent.com/98894580/172067957-cd67a350-b8db-49fe-8a3b-40af2d2b8402.png)
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+The resulting best model was an XGBoost classifier with data preparation via a sparse normalizer.
+![image](https://user-images.githubusercontent.com/98894580/172067928-61df58f2-e39c-45d8-912f-857b05e0f0e2.png)
 
-## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+![image](https://user-images.githubusercontent.com/98894580/172068220-535bd30a-f4a4-42bb-95e3-14eb2b944648.png)
 
-
-### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
-
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+A view into the explanations tells us about the impact of each feature on the chance of survival. Interestingly, sex and wealth (Pclass) are by far the most important factors to survive the disaster.
+![image](https://user-images.githubusercontent.com/98894580/172068281-a7fb01d9-a3a7-4c31-a51f-e7e2db6887f1.png)
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+
+The model was then deployed as an endpoint. Therefore, an ```InferenceConfig``` script as well as a ```score.py``` script for handling submitted data were generated. For the ease of handling, an additional function to predict directly fro pandas dataframes was included.
+![image](https://user-images.githubusercontent.com/98894580/172068345-48ea8514-16ed-442a-9c61-5fcf9f947a49.png)
+
+The 418 records from the testing dataset were submitted to the predictor, the result was again registered as a new dataset together with the respective indices from Kaggle. The results were also saved as a CSV file in the format required for Kaggle submission. The file was downloaded and submitted to Kaggle, scoring 0.73444 on the leaderboard.
+![image](https://user-images.githubusercontent.com/98894580/172068628-1901fe07-3644-4e6c-bfb2-48cbf90657c6.png)
+
+As this has been my first Kaggle competition I was quite happy with the result, but of course there is always some room for improvement.
+Especially promising should be the addition of further feature processing and engineering steps. For this purpose, non-linear transformations could be employed for breaking the correlation between different parameters. Some features like age could be transformed from continuous variables to categorical ones (e.g. "young", "adult", "elder"). Further information could be gathered on the individual status by taking into account titles and ranks separated from the names as well as using the family information to better approach the individual fare.
+On the machine learning side, of course extended training sessions as well as the utilization of ensembles could further improve results.
+
+## Hyperparameter Tuning
+After successfully employing AutoML for survivor prediction, I wanted to give a custom model with optimized hyperparameters a try. Therefore, a Hyperdrive setup was generated including a ```train.py``` script for the actual model generation and training. I decided for SKLearn's ```GradientBoostingRegressor``` as a base model and used Hyperdrive to use various values for maximum depth and learning rate by ```RandomParameterSampling```. For saving GPU time, a ```BanditPolicy``` was employed for early stopping and the training was limited to 40 runs.
+
+### Results
+The training took about 42 min and resulted in the best model giving an accuracy of only 44.4%.
+Probably ```GradientBoostingRegressor``` was not the best choice for solving this challenge. Furthermore, more than two hyperparameters could have been passed for optimization. Besides or even subsequent to the ```RandomParameterSampling``` run, further methods like ```BayesianParameterSampling``` or ```GridParameterSampling``` could improve results.
+![image](https://user-images.githubusercontent.com/98894580/172069157-cf33a4b4-f24f-4b81-9b1e-014828b63a76.png)
+
+![image](https://user-images.githubusercontent.com/98894580/172069286-233ec926-52fe-473a-881d-d2ccae8a3afe.png)
+
+![image](https://user-images.githubusercontent.com/98894580/172069235-23ad0cc5-b288-44f4-b2c7-b3f050d80b91.png)
+
+![image](https://user-images.githubusercontent.com/98894580/172069193-b3e9aeae-21b7-44ab-8532-e0d0222a26cd.png)
+
+As this result was not very promising, deploying an endpoint for submission of the testing data was skipped for this model.
 
 ## Screen Recording
 *TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
