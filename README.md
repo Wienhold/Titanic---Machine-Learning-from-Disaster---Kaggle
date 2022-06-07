@@ -2,7 +2,8 @@
 # Titanic - Machine Learning from Disaster (Kaggle Competition)
 
 After gaining some experience in working with Azure ML during my Udacity nanodegree I now want to finish the course with my capstone project.
-As I always love a challenge, I chose to work on the Titanic Kaggle competition project.
+As I always love a challenge, I chose to work on the Titanic Kaggle competition project. We want to generate a model which predicts with high accuracy if a specific individual is likely to survive the disaster or not. The goal is to get a response in for of a CSV which can directly be submitted to Kaggle.
+This task should be achieved via two potential routes, using Azure's AutoML as well as Hyperdrive tuning algorithms.
 
 ## Dataset
 
@@ -101,10 +102,11 @@ A view into the explanations tells us about the impact of each feature on the ch
 ## Model Deployment
 
 The model was then deployed as an endpoint. Therefore, an ```InferenceConfig``` script as well as a ```score.py``` script for handling submitted data were generated.
-The data can be submitted via REST URI, the composition of the request can be seen here:
+The data can be submitted via a post request to the scoring uri, the composition of the request can be seen here:
 ![image](https://user-images.githubusercontent.com/98894580/172406512-30986e3d-d486-459d-815c-967411c2e7a7.png)
-
+The response is a simple list of binary values, in this case ```[1,0]```, indicating that the first individual is predicted to survive while the second individual won't.
 For the ease of handling, an additional function to predict directly from pandas dataframes was included.
+
 ![image](https://user-images.githubusercontent.com/98894580/172068345-48ea8514-16ed-442a-9c61-5fcf9f947a49.png)
 
 The 418 records from the testing dataset were submitted to the predictor, the result was again registered as a new dataset together with the respective indices from Kaggle. The results were also saved as a CSV file in the format required for Kaggle submission. The file was downloaded and submitted to Kaggle, scoring 0.73444 on the leaderboard.
