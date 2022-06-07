@@ -112,6 +112,8 @@ On the machine learning side, of course extended training sessions as well as th
 
 ## Hyperparameter Tuning
 After successfully employing AutoML for survivor prediction, I wanted to give a custom model with optimized hyperparameters a try. Therefore, a Hyperdrive setup was generated including a ```train.py``` script for the actual model generation and training. I decided for SKLearn's ```GradientBoostingRegressor``` as a base model and used Hyperdrive to use various values for maximum depth and learning rate by ```RandomParameterSampling```. For saving GPU time, a ```BanditPolicy``` was employed for early stopping and the training was limited to 40 runs.
+The parameters selected for optimization are ```learning_rate``` and ```max_depth```, they should be selected via ```choice``` from a provided list. ```learning_rate``` as a generally important hyperparameter for all ML experiments should be varied to optimally reach the globally best metric and to avoid the pitfalls of getting stuck in local error minima at a too low as well as to overshoot at a too high learning rate. ```max_depth``` was selected due to its high importance in reaching good differentiation specifically for the gradient regression method. The maximum depth limits the number of nodes in the tree and should therefor be tuned for best performance.
+Of course various further parameters could be tuned like for example ```n_estimators```, ```max_leaf_nodes``` or various options for ```max_features```, but these were not considered in this first try to keep computation time low.
 
 ### Results
 The training took about 42 min and resulted in the best model giving an accuracy of only 44.4%.
@@ -125,6 +127,8 @@ Probably ```GradientBoostingRegressor``` was not the best choice for solving thi
 ![image](https://user-images.githubusercontent.com/98894580/172069193-b3e9aeae-21b7-44ab-8532-e0d0222a26cd.png)
 
 As this result was not very promising, deploying an endpoint for submission of the testing data was skipped for this model.
+
+More promising hyperparameter tuning approaches could start from the XGBoost model resulting from the AutoML run instead of the ```GradientBoostingRegressor``` and involve all tunable hyperparameters. As these would result in a large searchspace, they should potentially be analyzed via ```RandomParameterSampling```, potentially followed by further refinement via a ```BayesianParameterSampling``` strategy.
 
 ## Screen Recording
 [Presentation on YouTube](https://www.youtube.com/watch?v=iKqzK0DmQ0g)
