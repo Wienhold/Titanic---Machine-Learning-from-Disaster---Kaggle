@@ -83,16 +83,20 @@ automl_config = AutoMLConfig(
 ```
 
 ### Results
-After submission the experiment took about 22 min to complete. A total of 54 models were tested, with the best model reaching an accuracy of 82.7%. 
-![image](https://user-images.githubusercontent.com/98894580/172067957-cd67a350-b8db-49fe-8a3b-40af2d2b8402.png)
+After submission the experiment took about 20 min to complete. A total of 50 models were tested, with the best sucessful run reaching an accuracy of 82.1%. Some models returned failures and therefore weren't considered.
+![image](https://user-images.githubusercontent.com/98894580/172328429-93e8f12f-00ca-4a60-88a5-b36b93fabfc2.png)
+![image](https://user-images.githubusercontent.com/98894580/172328996-56cf7239-3812-44d7-b47c-56e35d69a86d.png)
+
+![image](https://user-images.githubusercontent.com/98894580/172327316-a2cc1ff5-2dcc-4ea0-a09b-f576ead9d40b.png)
+![image](https://user-images.githubusercontent.com/98894580/172327418-63478dff-a185-45c8-80b2-4c94800b86ee.png)
+
 
 The resulting best model was an XGBoost classifier with data preparation via a sparse normalizer.
-![image](https://user-images.githubusercontent.com/98894580/172067928-61df58f2-e39c-45d8-912f-857b05e0f0e2.png)
-
-![image](https://user-images.githubusercontent.com/98894580/172068220-535bd30a-f4a4-42bb-95e3-14eb2b944648.png)
+![image](https://user-images.githubusercontent.com/98894580/172328700-a754540b-65a4-45d0-94c4-8c12d88dac0f.png)
+![image](https://user-images.githubusercontent.com/98894580/172329525-6ebe4f47-6b89-4347-a470-ce7a7feea469.png)
 
 A view into the explanations tells us about the impact of each feature on the chance of survival. Interestingly, sex and wealth (Pclass) are by far the most important factors to survive the disaster.
-![image](https://user-images.githubusercontent.com/98894580/172068281-a7fb01d9-a3a7-4c31-a51f-e7e2db6887f1.png)
+![image](https://user-images.githubusercontent.com/98894580/172329284-62ffd662-1f19-4def-b200-1e9402769838.png)
 
 ## Model Deployment
 
