@@ -132,4 +132,4 @@ As this result was not very promising, deploying an endpoint for submission of t
 More promising hyperparameter tuning approaches could start from the XGBoost model resulting from the AutoML run instead of the ```GradientBoostingRegressor``` and involve all tunable hyperparameters. As these would result in a large searchspace, they should potentially be analyzed via ```RandomParameterSampling```, potentially followed by further refinement via a ```BayesianParameterSampling``` strategy.
 
 ## Screen Recording
-[Presentation on YouTube](https://www.youtube.com/watch?v=iKqzK0DmQ0g)
+[Presentation on YouTube](https://youtu.be/eQK2soYqhtU)
