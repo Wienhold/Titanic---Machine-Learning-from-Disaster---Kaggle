@@ -120,11 +120,11 @@ Probably ```GradientBoostingRegressor``` was not the best choice for solving thi
 
 ![image](https://user-images.githubusercontent.com/98894580/172069286-233ec926-52fe-473a-881d-d2ccae8a3afe.png)
 
-![image](https://user-images.githubusercontent.com/98894580/172069235-23ad0cc5-b288-44f4-b2c7-b3f050d80b91.png)
+![image](https://user-images.githubusercontent.com/98894580/172335672-6c8b2c9e-fc9d-4b2a-86bf-c3e8784b0a2a.png)
 
 ![image](https://user-images.githubusercontent.com/98894580/172069193-b3e9aeae-21b7-44ab-8532-e0d0222a26cd.png)
 
 As this result was not very promising, deploying an endpoint for submission of the testing data was skipped for this model.
 
 ## Screen Recording
-[Presentation on YouTube](https://youtu.be/brFCfghLiHc)
+[Presentation on YouTube](https://www.youtube.com/watch?v=iKqzK0DmQ0g)
