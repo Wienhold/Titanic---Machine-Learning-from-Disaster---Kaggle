@@ -100,7 +100,11 @@ A view into the explanations tells us about the impact of each feature on the ch
 
 ## Model Deployment
 
-The model was then deployed as an endpoint. Therefore, an ```InferenceConfig``` script as well as a ```score.py``` script for handling submitted data were generated. For the ease of handling, an additional function to predict directly fro pandas dataframes was included.
+The model was then deployed as an endpoint. Therefore, an ```InferenceConfig``` script as well as a ```score.py``` script for handling submitted data were generated.
+The data can be submitted via REST URI, the composition of the request can be seen here:
+![image](https://user-images.githubusercontent.com/98894580/172406512-30986e3d-d486-459d-815c-967411c2e7a7.png)
+
+For the ease of handling, an additional function to predict directly from pandas dataframes was included.
 ![image](https://user-images.githubusercontent.com/98894580/172068345-48ea8514-16ed-442a-9c61-5fcf9f947a49.png)
 
 The 418 records from the testing dataset were submitted to the predictor, the result was again registered as a new dataset together with the respective indices from Kaggle. The results were also saved as a CSV file in the format required for Kaggle submission. The file was downloaded and submitted to Kaggle, scoring 0.73444 on the leaderboard.
